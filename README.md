@@ -1,6 +1,3 @@
-Here’s a more visually polished and appealing version of the `README.md` with formatting enhancements to make it more engaging and user-friendly:
-
-```markdown
 # 🎉 **Messaging App** 📱💬
 
 A simple and intuitive messaging app built using **React**, **JavaScript**, and **Tailwind CSS**, enabling seamless communication between users and admins. After logging in, users and admins can chat securely, and all messages are saved locally for persistence.
