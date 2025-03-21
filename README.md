@@ -77,7 +77,7 @@ The app will be available at `http://localhost:3000`. Open this URL in your brow
 ## 🌐 **Live Demo**
 
 Check out the live demo of the app here:  
-[**Live Demo Link**](https://your-demo-link.com)
+[**Live Demo Link**](https://messaging-1-0.vercel.app/)
 
 ---
 
