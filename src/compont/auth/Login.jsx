@@ -1,56 +1,3 @@
-// import React, { useState } from 'react'
-// import { useNavigate } from 'react-router-dom'
-
-
-// function Login() {
-//   let [LoginName,setLoginName]=useState(" ");
-//   let [LoginPassword,setLoginPassword]=useState("");
-//    let storeAuthdata=JSON.parse(localStorage.getItem("auth"));
-  
-//   let userName=(e)=>{
-//     setLoginName(e.target.value);
-//     // console.log(LoginName);
-//   }
-  
-//   let userpassword=(e)=>{
-//     setLoginPassword(e.target.value);
-//     // console.log(a);
-//   }
-
-
-//   let navigate=useNavigate();
-//   let auth=(e)=>{
-//     e.preventDefault();
-//     if(LoginName==='admin' && LoginPassword==='123')
-//       {
-//        navigate("/admin") 
-//       }
-//       else if(storeAuthdata.username==="yashesh" || storeAuthdata.password==="123"){
-//         navigate("/user")
-//       }
-//       else{
-//         alert("invaild name or password");
-//       }
-//     }  
-  
-
-//   return (
-//     <div>
-//       <h1>Login page</h1>
-//       <form type="post"
-//        onSubmit={auth}
-//        >
-//         userName: <input name='name' type="text" className='border' required  onChange={userName} value={LoginName}/>
-//         Password: <input name="password" type="password" className='border' required onChange={userpassword} value={LoginPassword}/>
-//         <button type='submit'>Login in</button>
-//       </form>
-//     </div>
-//   )
-// }
-
-
-// export default Login
-
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -68,6 +15,11 @@ function Login() {
   }
 
   let navigate = useNavigate();
+  let ResgiterNavigate=()=>{
+    navigate("/register")
+  }
+
+  
   let auth = (e) => {
     e.preventDefault();
     if (LoginName === 'admin' && LoginPassword === '123') {
@@ -111,6 +63,8 @@ function Login() {
           Log In
         </button>
       </form>
+
+      <button className='flex justify-center mt-5' onClick={ResgiterNavigate}>New user click here</button>
     </div>
   )
 }

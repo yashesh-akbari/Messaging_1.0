@@ -1,42 +1,3 @@
-// import React, { useState } from 'react'
-// import { useNavigate } from 'react-router-dom';
-
-// function Register() {
-//   let [username,setusername]=useState('');
-//   let [password,setpassword]=useState('');
-//   let navigate=useNavigate();
-
-//   let handleName=(e)=>{
-//     setusername(e.target.value);
-//     console.log(username);
-//   }
-//   let handlePassword=(e)=>{
-//     setpassword(e.target.value);
-//     console.log(password);
-//   }
-//   let handleSubmit=(e)=>{
-//     e.preventDefault(); 
-//     navigate("/")
-//     localStorage.setItem("auth",JSON.stringify({username,password}))
-//   }
-
-//   return (
-//     <div>
-//       <form onSubmit={handleSubmit}>
-//       Name:<input type="text" value={username} onChange={handleName} required/>
-//       <br />
-//       Password:<input type="password" value={password} onChange={handlePassword} required/>
-//       <br />
-//       <button type='submit'>
-//         Register
-//       </button>
-//       </form>
-//     </div>
-//   )
-// }
-
-// export default Register
-
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
@@ -57,10 +18,15 @@ function Register() {
     localStorage.setItem("auth", JSON.stringify({ username, password }))
   }
 
+  let handleLogin=()=>{
+    navigate('/');
+  }
+
   return (
     <div className="max-w-sm mx-auto mt-20 p-6 bg-white rounded-xl shadow-md">
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
+          <h1 className='text-center text-3xl mb-3'>Register</h1>
           <label className="block text-sm font-medium text-gray-700">Name</label>
           <input
             type="text"
@@ -87,8 +53,10 @@ function Register() {
           Register
         </button>
       </form>
+      <button className='flex justify-center mt-5' onClick={handleLogin}>existing user click here</button>
     </div>
   )
 }
+      
 
 export default Register;

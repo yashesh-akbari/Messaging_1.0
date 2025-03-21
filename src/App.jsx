@@ -2,8 +2,8 @@ import './App.css'
 import { BrowserRouter as Router,Route,Routes } from 'react-router-dom'
 import Login from './compont/auth/login'
 import Register from './compont/auth/Register'
-import Admin from './compont/deshboard/admin'
-import User from './compont/deshboard/user'
+import Admin from './compont/deshboard/Admin'
+import User from './compont/deshboard/User'
 
 function App() {
 

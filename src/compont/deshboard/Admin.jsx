@@ -1,52 +1,3 @@
-// import React, { useEffect,useState } from 'react'
-
-// function Admin() {
-//   const [messages, setMessages] = useState([]);
-//   const [reply, setReply] = useState('');
-
-//   useEffect(()=>{
-//     const storedMessages=JSON.parse(localStorage.getItem('messages')) || [];
-//     setMessages(storedMessages);
-//   },[]);
-
-//   function handleReply(){
-//     if(reply.trim()){
-//       const newMessage={
-//         sender:'Admin',content:reply,timestamp: new Date().toLocaleDateString(),
-//       };
-
-//       const updatedMessages=[...messages,newMessage];
-//       localStorage.setItem('messages',JSON.stringify(updatedMessages));
-//       setMessages(updatedMessages);
-//       setReply('');
-//     }
-//   }
-
-
-//   return (
-//     <div>
-//       <div className='messages'>
-//         {messages.map((msg,index)=>(
-//           <div key={index} className={msg.sender === "Admin" ? 'admin-message' : 'user-message'}>
-//             <h2>{msg.sender}: {msg.content}</h2>
-//             <p>{msg.timestamp}</p>
-//           </div>
-//         ))}
-//          <textarea
-//         value={reply}
-//         onChange={(e) => setReply(e.target.value)}
-//         placeholder="Type your reply..."
-//         className="border border-gray-500"
-//       />
-//       <button onClick={handleReply}>Reply</button>
-//       </div>
-//     </div>
-//   )
-// }
-
-// export default Admin
-
-
 import React, { useEffect, useState } from 'react'
 
 function Admin() {
@@ -94,6 +45,8 @@ function Admin() {
         >
           Reply
         </button>
+
+        
       </div>
     </div>
   )
