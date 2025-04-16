@@ -64,7 +64,7 @@ function Login() {
         </button>
       </form>
 
-      <button className='flex justify-center mt-5' onClick={ResgiterNavigate}>Register</button>
+      <button className='flex justify-center mt-5' onClick={ResgiterNavigate}>New User</button>
     </div>
   )
 }

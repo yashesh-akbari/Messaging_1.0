@@ -53,7 +53,7 @@ function Register() {
           Register
         </button>
       </form>
-      <button className='flex justify-center mt-5' onClick={handleLogin}>Login</button>
+      <button className='flex justify-center mt-5' onClick={handleLogin}>Existing user</button>
     </div>
   )
 }
