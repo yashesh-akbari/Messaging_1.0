@@ -4,19 +4,19 @@ function User() {
   const [messages, setMessages] = useState([]);
   const [reply, setReply] = useState('');
 
-  // Load messages on first render
+  // Load messages from localStorage initially and every second
   useEffect(() => {
-    const storedMessages = JSON.parse(localStorage.getItem('messages')) || [];
-    setMessages(storedMessages);
-  }, []);
+    const loadMessages = () => {
+      const storedMessages = JSON.parse(localStorage.getItem('messages')) || [];
+      setMessages(storedMessages);
+    };
 
-  // Reload page every 1 second
-  useEffect(() => {
+    loadMessages();
+
     const interval = setInterval(() => {
-      window.location.reload();
+      loadMessages();
     }, 1000);
 
-    // Clean up the interval on component unmount
     return () => clearInterval(interval);
   }, []);
 
@@ -27,6 +27,7 @@ function User() {
         content: reply,
         timestamp: new Date().toLocaleTimeString(),
       };
+
       const updatedMessages = [...messages, newMessage];
       localStorage.setItem('messages', JSON.stringify(updatedMessages));
       setMessages(updatedMessages);

@@ -4,19 +4,19 @@ function Admin() {
   const [messages, setMessages] = useState([]);
   const [reply, setReply] = useState('');
 
-  // Load messages on first render
+  // Load messages from localStorage initially and every second
   useEffect(() => {
-    const storedMessages = JSON.parse(localStorage.getItem('messages')) || [];
-    setMessages(storedMessages);
-  }, []);
+    const loadMessages = () => {
+      const storedMessages = JSON.parse(localStorage.getItem('messages')) || [];
+      setMessages(storedMessages);
+    };
 
-  // Reload the page every 1 second
-  useEffect(() => {
+    loadMessages();
+
     const interval = setInterval(() => {
-      window.location.reload();
+      loadMessages();
     }, 1000);
 
-    // Clear interval on component unmount
     return () => clearInterval(interval);
   }, []);
 
