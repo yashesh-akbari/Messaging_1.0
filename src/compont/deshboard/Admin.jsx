@@ -1,12 +1,23 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 
 function Admin() {
   const [messages, setMessages] = useState([]);
   const [reply, setReply] = useState('');
 
+  // Load messages on first render
   useEffect(() => {
     const storedMessages = JSON.parse(localStorage.getItem('messages')) || [];
     setMessages(storedMessages);
+  }, []);
+
+  // Reload the page every 1 second
+  useEffect(() => {
+    const interval = setInterval(() => {
+      window.location.reload();
+    }, 1000);
+
+    // Clear interval on component unmount
+    return () => clearInterval(interval);
   }, []);
 
   function handleReply() {
@@ -28,8 +39,17 @@ function Admin() {
     <div className="max-w-lg mx-auto mt-10 p-6 bg-white rounded-xl shadow-md">
       <div className="messages space-y-4">
         {messages.map((msg, index) => (
-          <div key={index} className={msg.sender === "Admin" ? 'bg-gray-100 p-3 rounded-md' : 'bg-blue-100 p-3 rounded-md'}>
-            <h2 className="font-semibold">{msg.sender}: {msg.content}</h2>
+          <div
+            key={index}
+            className={
+              msg.sender === 'Admin'
+                ? 'bg-gray-100 p-3 rounded-md'
+                : 'bg-blue-100 p-3 rounded-md'
+            }
+          >
+            <h2 className="font-semibold">
+              {msg.sender}: {msg.content}
+            </h2>
             <p className="text-sm text-gray-600">{msg.timestamp}</p>
           </div>
         ))}
@@ -45,11 +65,9 @@ function Admin() {
         >
           Reply
         </button>
-
-        
       </div>
     </div>
-  )
+  );
 }
 
 export default Admin;
