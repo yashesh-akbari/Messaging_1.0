@@ -3,6 +3,15 @@
 // function User() {
 //   const [messages, setMessages] = useState([]);
 //   const [reply, setReply] = useState('');
+//   const [username, setUsername] = useState('');
+
+//   // Load user name from localStorage
+//   useEffect(() => {
+//     const authData = JSON.parse(localStorage.getItem('auth'));
+//     if (authData && authData.username) {
+//       setUsername(authData.username);
+//     }
+//   }, []);
 
 //   // Load messages from localStorage initially and every second
 //   useEffect(() => {
@@ -23,7 +32,7 @@
 //   function handleReply() {
 //     if (reply.trim()) {
 //       const newMessage = {
-//         sender: 'User',
+//         sender: username || 'User',
 //         content: reply,
 //         timestamp: new Date().toLocaleTimeString(),
 //       };
@@ -79,15 +88,17 @@ function User() {
   const [reply, setReply] = useState('');
   const [username, setUsername] = useState('');
 
-  // Load user name from localStorage
+  // ✅ Load logged-in user's username from localStorage
   useEffect(() => {
     const authData = JSON.parse(localStorage.getItem('auth'));
     if (authData && authData.username) {
-      setUsername(authData.username);
+      setUsername(authData.username); // ✅ This will be "yashesh"
+    } else {
+      setUsername('User'); // Fallback if no user is found
     }
   }, []);
 
-  // Load messages from localStorage initially and every second
+  // Load messages initially and update every 1 second
   useEffect(() => {
     const loadMessages = () => {
       const storedMessages = JSON.parse(localStorage.getItem('messages')) || [];
@@ -95,18 +106,14 @@ function User() {
     };
 
     loadMessages();
-
-    const interval = setInterval(() => {
-      loadMessages();
-    }, 1000);
-
+    const interval = setInterval(loadMessages, 1000);
     return () => clearInterval(interval);
   }, []);
 
-  function handleReply() {
+  const handleReply = () => {
     if (reply.trim()) {
       const newMessage = {
-        sender: username || 'User',
+        sender: username, // 👈 Now it will be the actual username like "yashesh"
         content: reply,
         timestamp: new Date().toLocaleTimeString(),
       };
@@ -116,7 +123,7 @@ function User() {
       setMessages(updatedMessages);
       setReply('');
     }
-  }
+  };
 
   return (
     <div className="max-w-lg mx-auto mt-10 p-6 bg-white rounded-xl shadow-md">
