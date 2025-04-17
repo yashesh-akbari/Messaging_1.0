@@ -61,7 +61,7 @@ function Admin() {
         />
         <button
           onClick={handleReply}
-          className="w-full mt-3 p-3 bg-green-500 text-white rounded-md hover:bg-green-600"
+          className="w-full mt-3 p-3 bg-blue-500 text-white rounded-md hover:bg-blue-600"
         >
           Reply
         </button>
