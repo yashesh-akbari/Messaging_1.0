@@ -4,21 +4,29 @@
 // function Register() {
 //   let [username, setusername] = useState('');
 //   let [password, setpassword] = useState('');
+//   let [successMessage, setSuccessMessage] = useState('');
 //   let navigate = useNavigate();
 
 //   let handleName = (e) => {
 //     setusername(e.target.value);
 //   }
+
 //   let handlePassword = (e) => {
 //     setpassword(e.target.value);
 //   }
+
 //   let handleSubmit = (e) => {
 //     e.preventDefault();
-//     navigate("/")
-//     localStorage.setItem("auth", JSON.stringify({ username, password }))
+//     localStorage.setItem("auth", JSON.stringify({ username, password }));
+//     setSuccessMessage("You are successfully registered!");
+
+//     // Optional: Delay navigation to show message for a second
+//     setTimeout(() => {
+//       navigate("/");
+//     }, 1500); // 1.5 second delay
 //   }
 
-//   let handleLogin=()=>{
+//   let handleLogin = () => {
 //     navigate('/');
 //   }
 
@@ -53,45 +61,70 @@
 //           Register
 //         </button>
 //       </form>
-//       <button className='flex justify-center mt-5 text-blue-500 hover:underline' onClick={handleLogin}>Existing user? Login here. </button>
+
+//       {successMessage && (
+//         <div className="mt-4 text-green-600 text-center font-medium">
+//           {successMessage}
+//         </div>
+//       )}
+
+//       <button className='flex justify-center mt-5 text-blue-500 hover:underline' onClick={handleLogin}>
+//         Existing user? Login here.
+//       </button>
 //     </div>
 //   )
 // }
-      
 
 // export default Register;
 
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function Register() {
-  let [username, setusername] = useState('');
-  let [password, setpassword] = useState('');
-  let [successMessage, setSuccessMessage] = useState('');
-  let navigate = useNavigate();
+  const [username, setusername] = useState('');
+  const [password, setpassword] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+  const navigate = useNavigate();
 
-  let handleName = (e) => {
+  const handleName = (e) => {
     setusername(e.target.value);
-  }
+  };
 
-  let handlePassword = (e) => {
+  const handlePassword = (e) => {
     setpassword(e.target.value);
-  }
+  };
 
-  let handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    localStorage.setItem("auth", JSON.stringify({ username, password }));
+
+    // Fetch existing users or default to empty array
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+
+    // Check if username already exists
+    const userExists = users.some(user => user.username === username);
+
+    if (userExists) {
+      alert("User already available");
+      return;
+    }
+
+    // Add new user
+    const newUser = { username, password };
+    const updatedUsers = [...users, newUser];
+    localStorage.setItem('users', JSON.stringify(updatedUsers));
+    localStorage.setItem('auth', JSON.stringify(newUser)); // Optional: log them in
+
     setSuccessMessage("You are successfully registered!");
 
-    // Optional: Delay navigation to show message for a second
+    // Delay navigation to show success message
     setTimeout(() => {
       navigate("/");
-    }, 1500); // 1.5 second delay
-  }
+    }, 1500);
+  };
 
-  let handleLogin = () => {
+  const handleLogin = () => {
     navigate('/');
-  }
+  };
 
   return (
     <div className="max-w-sm mx-auto mt-20 p-6 bg-white rounded-xl shadow-md">
@@ -131,11 +164,14 @@ function Register() {
         </div>
       )}
 
-      <button className='flex justify-center mt-5 text-blue-500 hover:underline' onClick={handleLogin}>
+      <button
+        className="flex justify-center mt-5 text-blue-500 hover:underline"
+        onClick={handleLogin}
+      >
         Existing user? Login here.
       </button>
     </div>
-  )
+  );
 }
 
 export default Register;
